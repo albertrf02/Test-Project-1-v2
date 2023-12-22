@@ -98,7 +98,7 @@
   </div>
   </div>
   <div class="flex justify-end">
-    <a href="formulario.html" class="bg-black text-white py-2 px-4 rounded inline-block mr-8">Participar en el
+    <a href="/formulari" class="bg-black text-white py-2 px-4 rounded inline-block mr-8">Participar en el
       Concurs</a>
   </div>
 

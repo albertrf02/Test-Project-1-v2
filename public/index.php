@@ -17,7 +17,8 @@ $contenidor = new Container(__DIR__ . "/../App/config.php");
 $app = new \Emeset\Emeset($contenidor);
 
 $app->get("/", [ViewsController::class, "index"]);
-
+$app->get("/formulari", [ViewsController::class, "formulari"]);
+$app->post("/formulariPost", [ViewsController::class, "formulari"]);
 
 
 

@@ -15,15 +15,9 @@ class Container extends EmesetContainer
         $dbType = $this->get("config")["db_type"];
         if ($dbType == "PDO") {
 
-            // $this["users"] = function ($c) {
-            //     return new \App\Models\Users($c["db"]->getConnection());
-            // };
-            // $this["orles"] = function ($c) {
-            //     return new \App\Models\Orles($c["db"]->getConnection());
-            // };
-            // $this["classes"] = function ($c) {
-            //     return new \App\Models\Classes($c["db"]->getConnection());
-            // };
+            $this["formulari"] = function ($c) {
+                return new \App\Models\Formulari($c["db"]->getConnection());
+            };
 
             $this["db"] = function ($c) {
                 return new \App\Models\Db(
