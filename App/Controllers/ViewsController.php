@@ -33,6 +33,7 @@ class ViewsController
 
             if ($result) {
                 echo "successful!";
+                $response->redirect("/");
             } else {
                 echo "failed.";
             }

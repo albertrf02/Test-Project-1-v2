@@ -103,9 +103,7 @@
   </div>
 
   </div>
-  <script src="/js/bundle.js"></script>
-  <script src="/js/flowbite.js"></script>
 </body>
-<?php require "Scripts.php" ?>
+<?php require "scripts.php" ?>
 
 </html>

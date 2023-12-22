@@ -11,7 +11,7 @@ return [
     "db" => [
         "user" => Emeset\Env::get("user", "root"),
         "pass" => Emeset\Env::get("pass", ""),
-        "db" => Emeset\Env::get("db", "orlify"),
+        "db" => Emeset\Env::get("db", "testproject1"),
         "host" => Emeset\Env::get("host", "localhost")
     ],
     "url" => Emeset\Env::get("url", "localhost")
