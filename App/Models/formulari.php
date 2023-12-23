@@ -34,19 +34,21 @@ class Formulari
         $this->options = $options;
     }
 
-    public function insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup)
+    public function insertInscriptions($nom, $cognoms, $email, $contrasenya, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup)
     {
 
         if (isset($_FILES['resguard']) && $_FILES['resguard']['error'] === 0) {
             $resguardPath = 'resguard/' . $_FILES['resguard']['name'];
 
             if (move_uploaded_file($_FILES['resguard']['tmp_name'], $resguardPath)) {
-                $sql = "INSERT INTO participants (Nom, Cognoms, DataNaixement, Carrer, Numero, Ciutat, CP, Grup)
-                        VALUES (:nom, :cognoms, :dataNaixement, :carrer, :numero, :ciutat, :codiPostal, :grup)";
+                $sql = "INSERT INTO participants (nom, cognoms, email, contrasenya, dataNaixement, carrer, numero, ciutat, cp, grup)
+                        VALUES (:nom, :cognoms, :email, :contrasenya, :dataNaixement, :carrer, :numero, :ciutat, :codiPostal, :grup)";
                 $stmt = $this->sql->prepare($sql);
 
                 $stmt->bindParam(':nom', $nom);
                 $stmt->bindParam(':cognoms', $cognoms);
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':contrasenya', $contrasenya);
                 $stmt->bindParam(':dataNaixement', $dataNaixement);
                 $stmt->bindParam(':carrer', $carrer);
                 $stmt->bindParam(':numero', $numero);
@@ -68,14 +70,5 @@ class Formulari
                 }
             }
         }
-    }
-
-    public function getLastInscription()
-    {
-        $sql = "SELECT * FROM participants ORDER BY Id DESC LIMIT 1";
-        $stmt = $this->sql->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        return $result;
     }
 }

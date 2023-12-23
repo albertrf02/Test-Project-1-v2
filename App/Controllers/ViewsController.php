@@ -17,10 +17,12 @@ class ViewsController
     {
         $modelFormulari = $container->get("formulari");
 
-        if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['birthdate']) && isset($_POST['address']) && isset($_POST['number']) && isset($_POST['city']) && isset($_POST['postalcode']) && isset($_POST['group']))) {
+        if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['birthdate']) && isset($_POST['address']) && isset($_POST['number']) && isset($_POST['city']) && isset($_POST['postalcode']) && isset($_POST['group']))) {
 
             $nom = $_POST['name'];
             $cognoms = $_POST['surname'];
+            $email = $_POST['email'];
+            $contrasenya = ($_POST['password']);
             $dataNaixement = $_POST['birthdate'];
             $carrer = $_POST['address'];
             $numero = $_POST['number'];
@@ -28,7 +30,7 @@ class ViewsController
             $codiPostal = $_POST['postalcode'];
             $grup = $_POST['group'];
 
-            $result = $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
+            $result = $modelFormulari->insertInscriptions($nom, $cognoms, $email, $contrasenya, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
 
             if ($result) {
                 $response->redirect('Location: /comprovant');
@@ -45,10 +47,16 @@ class ViewsController
 
     public function comprovant($request, $response, $container)
     {
-        $modelFormulari = $container->get("formulari");
-        $lastInscription = $modelFormulari->getLastInscription();
+        $modelUsers = $container->get("users");
+        $lastInscription = $modelUsers->getLastInscription();
         $response->set("lastInscription", $lastInscription);
         $response->setTemplate("comprovant.php");
+        return $response;
+    }
+
+    public function login($request, $response, $container)
+    {
+        $response->setTemplate("login.php");
         return $response;
     }
 }

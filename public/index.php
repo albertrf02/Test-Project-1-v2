@@ -20,8 +20,8 @@ $app->get("/", [ViewsController::class, "index"]);
 $app->get("/formulari", [ViewsController::class, "formulari"]);
 $app->post("/formulari", [ViewsController::class, "formulari"]);
 $app->get("/comprovant", [ViewsController::class, "comprovant"]);
-
-
+$app->get("/login", [ViewsController::class, "login"]);
+$app->post("/login", [ViewsController::class, "login"]);
 
 
 

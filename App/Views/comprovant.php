@@ -20,37 +20,44 @@
             <h2 class="text-2xl font-bold mb-4">Informació registrada</h2>
             <hr class="mb-4">
             <p class="mb-2"><strong>Codi de registre:</strong>
-                <?= $lastInscription["Id"] ?>
+                <?= $lastInscription["id"] ?>
             </p>
             <p class="mb-2"><strong>Nom:</strong>
-                <?= $lastInscription["Nom"] ?>
+                <?= $lastInscription["nom"] ?>
             </p>
             <p class="mb-2"><strong>Cognoms:</strong>
-                <?= $lastInscription["Cognoms"] ?>
+                <?= $lastInscription["cognoms"] ?>
+            </p>
+            <p class="mb-2"><strong>Email:</strong>
+                <?= $lastInscription["email"] ?>
             </p>
             <p class="mb-2"><strong>Data de neixement:</strong>
-                <?= $lastInscription["DataNaixement"] ?>
+                <?= $lastInscription["dataNaixement"] ?>
             </p>
             <p class="mb-2"><strong>Carrer:</strong>
-                <?= $lastInscription["Carrer"] ?>
+                <?= $lastInscription["carrer"] ?>
             </p>
             <p class="mb-2"><strong>Numero:</strong>
-                <?= $lastInscription["Numero"] ?>
+                <?= $lastInscription["numero"] ?>
             </p>
             <p class="mb-2"><strong>Ciutat:</strong>
-                <?= $lastInscription["Ciutat"] ?>
+                <?= $lastInscription["ciutat"] ?>
             </p>
             <p class="mb-2"><strong>Codi postal:</strong>
-                <?= $lastInscription["CP"] ?>
+                <?= $lastInscription["cp"] ?>
             </p>
             <p class="mb-2"><strong>Grup:</strong>
-                <?= $lastInscription["Grup"] ?>
+                <?= $lastInscription["grup"] ?>
             </p>
 
-            <div class="mt-6 text-center">
-                <a href="/" class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition">Torna a
-                    la pàgina inicial</a>
+            <div class="flex mt-6">
+                <a href="/"
+                    class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition mr-6 ml-6">Pàgina
+                    inicial</a>
+                <a href="/login" class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition">Iniciar
+                    sessió</a>
             </div>
+
         </div>
     </div>
 

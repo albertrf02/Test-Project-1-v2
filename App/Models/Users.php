@@ -34,5 +34,13 @@ class Users
         $this->options = $options;
     }
 
+    public function getLastInscription()
+    {
+        $sql = "SELECT * FROM participants ORDER BY Id DESC LIMIT 1";
+        $stmt = $this->sql->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result;
+    }
 
 }
