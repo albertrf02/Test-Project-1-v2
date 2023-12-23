@@ -34,6 +34,13 @@ class Formulari
         $this->options = $options;
     }
 
+    public function getUserById($id)
+    {
+        $query = 'select * from participants where Id=:id;';
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':id' => $id]);
+    }
+
     public function insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup)
     {
 
@@ -59,19 +66,19 @@ class Formulari
                     $resguardStmt = $this->sql->prepare($resguardsql);
                     $resguardStmt->bindParam(':path', $_FILES['resguard']['name']);
                     $resguardStmt->bindParam(':idParticipants', $this->sql->lastInsertId());
+
                     if ($resguardStmt->execute()) {
                         $userId = $this->sql->lastInsertId();
-                        exit;
+
+                        $user = $this->getUserById($userId);
+                        header('Location: /comprovant');
+                        return $user;
+
                     }
                 }
-                // ...
             } else {
-                echo 'File upload failed. Debugging information: ';
-                print_r($_FILES);
+                echo "No s'ha pogut pujar el resguard";
             }
-
-
-
         }
     }
 }

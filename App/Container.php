@@ -18,6 +18,9 @@ class Container extends EmesetContainer
             $this["formulari"] = function ($c) {
                 return new \App\Models\Formulari($c["db"]->getConnection());
             };
+            $this["users"] = function ($c) {
+                return new \App\Models\Users($c["db"]->getConnection());
+            };
 
             $this["db"] = function ($c) {
                 return new \App\Models\Db(

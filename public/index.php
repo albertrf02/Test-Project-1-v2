@@ -19,6 +19,7 @@ $app = new \Emeset\Emeset($contenidor);
 $app->get("/", [ViewsController::class, "index"]);
 $app->get("/formulari", [ViewsController::class, "formulari"]);
 $app->post("/formulariPost", [ViewsController::class, "formulari"]);
+$app->get("/comprovant", [ViewsController::class, "comprovant"]);
 
 
 

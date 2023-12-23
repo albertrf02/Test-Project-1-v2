@@ -30,12 +30,16 @@ class ViewsController
 
             $result = $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
 
-
             if ($result) {
-                echo "successful!";
-                $response->redirect("/");
-            } else {
-                echo "failed.";
+                $user = $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
+
+                if ($user) {
+                    // Pass the user data to the view
+                    $response->set("user", $user);
+                    $response->setSession("error", "S'ha registrat correctament");
+                } else {
+                    $response->setSession("error", "No s'ha pogut registrar");
+                }
             }
         }
         $response->setTemplate("formulari.php");
