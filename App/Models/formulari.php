@@ -34,13 +34,6 @@ class Formulari
         $this->options = $options;
     }
 
-    public function getUserById($id)
-    {
-        $query = 'select * from participants where Id=:id;';
-        $stm = $this->sql->prepare($query);
-        $stm->execute([':id' => $id]);
-    }
-
     public function insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup)
     {
 
@@ -68,18 +61,21 @@ class Formulari
                     $resguardStmt->bindParam(':idParticipants', $this->sql->lastInsertId());
 
                     if ($resguardStmt->execute()) {
-                        $userId = $this->sql->lastInsertId();
-
-                        $user = $this->getUserById($userId);
-                        header('Location: /comprovant');
-                        return $user;
-
+                        return true;
+                    } else {
+                        echo "No s'ha pogut pujar el resguard";
                     }
                 }
-            } else {
-                echo "No s'ha pogut pujar el resguard";
             }
         }
     }
-}
 
+    public function getLastInscription()
+    {
+        $sql = "SELECT * FROM participants ORDER BY Id DESC LIMIT 1";
+        $stmt = $this->sql->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $result;
+    }
+}

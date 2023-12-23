@@ -31,18 +31,24 @@ class ViewsController
             $result = $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
 
             if ($result) {
-                $user = $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
-
-                if ($user) {
-                    // Pass the user data to the view
-                    $response->set("user", $user);
-                    $response->setSession("error", "S'ha registrat correctament");
-                } else {
-                    $response->setSession("error", "No s'ha pogut registrar");
-                }
+                $response->redirect('Location: /comprovant');
+                $response->set("result", $_POST);
+            } else {
+                $response->setSession("error", "No s'ha pogut registrar");
+                $response->redirect("index.php");
             }
         }
+
         $response->setTemplate("formulari.php");
+        return $response;
+    }
+
+    public function comprovant($request, $response, $container)
+    {
+        $modelFormulari = $container->get("formulari");
+        $lastInscription = $modelFormulari->getLastInscription();
+        $response->set("lastInscription", $lastInscription);
+        $response->setTemplate("comprovant.php");
         return $response;
     }
 }

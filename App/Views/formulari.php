@@ -15,7 +15,7 @@
                 <div class="bg-white p-5 rounded w-full sm:w-96">
                     <h2 class="text-2xl font-bold text-center mb-4">Participació</h2>
                     <hr class="mb-4">
-                    <form class="max-w-sm mx-auto" method="POST" action="/formulariPost" enctype="multipart/form-data"
+                    <form class="max-w-sm mx-auto" method="POST" action="/formulari" enctype="multipart/form-data"
                         aria-label="Formulari-inscripcio">
                         <div class="flex mb-5">
                             <span
@@ -132,6 +132,7 @@
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Inscriu-te</button>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
