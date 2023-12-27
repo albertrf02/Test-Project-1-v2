@@ -7,12 +7,9 @@
   <link rel="stylesheet" href="/main.css">
   <title>Test Project</title>
 </head>
-
-
-
 <?php require "header.php" ?>
 
-<body class="bg-cover bg-center bg-no-repeat " style="background-image: url('/img/background.jpg');">
+<body class="bg-cover bg-center bg-no-repeat" style="background-image: url('/img/background.jpg');">
   <div class="mt-[-57px]">
     <div class="flex items-center justify-center min-h-screen">
       <div class="container mx-auto p-8">

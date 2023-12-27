@@ -23,6 +23,7 @@ $app->post("/formulari", [ViewsController::class, "formulari"]);
 $app->get("/comprovant", [ViewsController::class, "comprovant"]);
 $app->get("/login", [ViewsController::class, "login"]);
 $app->post("/loginAJAX", [LoginController::class, "login"]);
+$app->get("/logout", [LoginController::class, "logout"]);
 
 
 

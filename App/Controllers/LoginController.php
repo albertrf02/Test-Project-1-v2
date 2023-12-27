@@ -33,4 +33,12 @@ class LoginController
 
         return $response;
     }
+
+    public function logout($request, $response, $container)
+    {
+        $response->setSession("logged", false);
+        $response->setSession("user", null);
+        $response->redirect("Location: /");
+        return $response;
+    }
 }

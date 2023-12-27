@@ -10,12 +10,14 @@ class ViewsController
         $response->set("error", $error);
         $response->setSession("error", "");
         $response->SetTemplate("index.php");
+
         return $response;
     }
 
     public function formulari($request, $response, $container)
     {
         $modelFormulari = $container->get("formulari");
+        $response->set("error", "");
 
         if ((isset($_POST['name']) && isset($_POST['surname']) && isset($_POST['birthdate']) && isset($_POST['address']) && isset($_POST['number']) && isset($_POST['city']) && isset($_POST['postalcode']) && isset($_POST['group']))) {
 
@@ -28,14 +30,15 @@ class ViewsController
             $codiPostal = $_POST['postalcode'];
             $grup = $_POST['group'];
 
-            $result = $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
+            $exisitingUser = $modelFormulari->checkNomAndCognom($nom, $cognoms);
 
-            if ($result) {
-                $response->redirect('Location: /comprovant');
-                $response->set("result", $_POST);
+
+            if (!$exisitingUser) {
+                $response->set("error", "");
+                $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
+                $response->redirect("Location: /comprovant");
             } else {
-                $response->setSession("error", "No s'ha pogut registrar");
-                $response->redirect("index.php");
+                $response->set("error", "Ja has participat una vegada, inicia sessió per tornar a participar.");
             }
         }
 
