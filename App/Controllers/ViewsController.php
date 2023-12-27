@@ -55,6 +55,8 @@ class ViewsController
     public function login($request, $response, $container)
     {
         $response->setTemplate("login.php");
+        $user = $request->get("SESSION", "user");
+        $response->set("user", $user);
         return $response;
     }
 }

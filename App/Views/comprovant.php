@@ -20,7 +20,7 @@
             <h2 class="text-2xl font-bold mb-4">Informació registrada</h2>
             <hr class="mb-4">
             <p class="mb-2"><strong>Codi de registre:</strong>
-                <?= $lastInscription["id"] ?>
+                <?= $lastInscription["token"] ?>
             </p>
             <p class="mb-2"><strong>Nom:</strong>
                 <?= $lastInscription["nom"] ?>
@@ -47,13 +47,18 @@
                 <?= $lastInscription["grup"] ?>
             </p>
 
-            <div class="flex mt-6">
+            <div class="flex mt-6 mb-6">
                 <a href="/"
                     class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition mr-6 ml-6">Pàgina
                     inicial</a>
                 <a href="/login" class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition">Iniciar
                     sessió</a>
             </div>
+
+            <hr class="mb-2">
+            <p>
+                <strong>IMPORTANT: </strong>Guarda el codi de registre per poder iniciar sessió.
+            </p>
 
         </div>
     </div>

@@ -43,17 +43,21 @@ class Users
         return $result;
     }
 
-    private function generateRandomToken()
+    public function getUser($token)
     {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randomString = '';
+        $query = 'select * from participants where token=:token;';
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':token' => $token]);
 
-        for ($i = 0; $i < 10; $i++) {
-            $index = rand(0, strlen($characters) - 1);
-            $randomString .= $characters[$index];
+        if ($stm->errorCode() !== '00000') {
+            $err = $stm->errorInfo();
+            $code = $stm->errorCode();
+            die("Error.   {$err[0]} - {$err[1]}\n{$err[2]} $query");
         }
 
-        return $randomString;
+        return $stm->fetch(\PDO::FETCH_ASSOC);
     }
+
+
 
 }

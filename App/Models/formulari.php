@@ -34,6 +34,19 @@ class Formulari
         $this->options = $options;
     }
 
+    public function generateRandomToken()
+    {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomString = '';
+
+        for ($i = 0; $i < 10; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+
+        return $randomString;
+    }
+
     public function insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup)
     {
 
@@ -41,12 +54,13 @@ class Formulari
             $resguardPath = 'resguard/' . $_FILES['resguard']['name'];
 
             if (move_uploaded_file($_FILES['resguard']['tmp_name'], $resguardPath)) {
-                $sql = "INSERT INTO participants (nom, cognoms, dataNaixement, carrer, numero, ciutat, cp, grup)
-                        VALUES (:nom, :cognoms, :dataNaixement, :carrer, :numero, :ciutat, :codiPostal, :grup)";
+                $sql = "INSERT INTO participants (nom, cognoms, token, dataNaixement, carrer, numero, ciutat, cp, grup)
+                        VALUES (:nom, :cognoms, :token, :dataNaixement, :carrer, :numero, :ciutat, :codiPostal, :grup)";
                 $stmt = $this->sql->prepare($sql);
 
                 $stmt->bindParam(':nom', $nom);
                 $stmt->bindParam(':cognoms', $cognoms);
+                $stmt->bindParam(':token', $this->generateRandomToken());
                 $stmt->bindParam(':dataNaixement', $dataNaixement);
                 $stmt->bindParam(':carrer', $carrer);
                 $stmt->bindParam(':numero', $numero);
