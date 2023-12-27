@@ -5,10 +5,9 @@ use testProject1;
 
 CREATE TABLE participants (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    token VARCHAR(255) NOT NULL,
     nom VARCHAR(50) NOT NULL,
     cognoms VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    contrasenya VARCHAR(50) NOT NULL,
     dataNaixement DATE NOT NULL,
     carrer VARCHAR(100) NOT NULL,
     numero VARCHAR(10) NOT NULL,

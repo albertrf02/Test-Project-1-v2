@@ -28,9 +28,6 @@
             <p class="mb-2"><strong>Cognoms:</strong>
                 <?= $lastInscription["cognoms"] ?>
             </p>
-            <p class="mb-2"><strong>Email:</strong>
-                <?= $lastInscription["email"] ?>
-            </p>
             <p class="mb-2"><strong>Data de neixement:</strong>
                 <?= $lastInscription["dataNaixement"] ?>
             </p>
