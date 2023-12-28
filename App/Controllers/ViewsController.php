@@ -62,4 +62,16 @@ class ViewsController
         $response->set("user", $user);
         return $response;
     }
+
+    public function taules($request, $response, $container)
+    {
+        $modelUsers = $container->get("users");
+        $user = $request->get("SESSION", "user");
+        $token = $user["token"];
+        $userCards = $modelUsers->getCardsByUser($token);
+        $response->set("userCards", $userCards);
+
+        $response->setTemplate("taules.php");
+        return $response;
+    }
 }

@@ -30,7 +30,7 @@ class Auth
 
             $userModel = $container->get("users");
 
-            $email = $request->get("SESSION", "user")["email"];
+            $email = $request->get("SESSION", "user")["token"];
             $user = $userModel->getUser($email);
 
             $response->set("user", $user);

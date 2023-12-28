@@ -58,7 +58,16 @@ class Users
         return $stm->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getCardsByUser($token)
+    {
+        $query = 'SELECT Resguard.*
+        FROM Resguard
+        JOIN participants ON Resguard.idParticipants = participants.id
+        WHERE participants.token = :token;';
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':token' => $token]);
 
-
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
 }
