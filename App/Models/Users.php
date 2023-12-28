@@ -70,4 +70,13 @@ class Users
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function uploadCard($id)
+    {
+        $query = 'INSERT INTO Resguard (idParticipants, path) VALUES (:id, :path);';
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':id' => $id, ':path' => $_FILES['card']['name']]);
+
+        return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
 }

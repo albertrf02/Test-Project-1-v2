@@ -26,6 +26,7 @@ $app->get("/formulari", [ViewsController::class, "formulari"]);
 $app->post("/formulari", [ViewsController::class, "formulari"]);
 $app->get("/comprovant", [ViewsController::class, "comprovant"]);
 $app->get("/taules", [ViewsController::class, "taules"], [[\App\Middleware\Auth::class, "auth"]]);
+$app->post("/uploadCard", [ViewsController::class, "uploadCard"], [[\App\Middleware\Auth::class, "auth"]]);
 
 
 

@@ -74,4 +74,17 @@ class ViewsController
         $response->setTemplate("taules.php");
         return $response;
     }
+
+    public function uploadCard($request, $response, $container)
+    {
+        $modelUsers = $container->get("users");
+        $user = $request->get("SESSION", "user");
+
+        if (isset($_FILES['card']) && $_FILES['card']['error'] === 0) {
+            $modelUsers->uploadCard($user["id"]);
+            $response->redirect("Location: /taules");
+        }
+
+        return $response;
+    }
 }
