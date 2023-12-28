@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/main.css">
-    <title>Document</title>
+    <title>form</title>
 </head>
 
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
@@ -140,9 +140,9 @@
                 </form>
             </div>
         </div>
-        <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2 shadow-2xl">
+        <div class="w-full md:w-full lg:w-1/2 xl:w-1/2">
             <div class="image-container relative">
-                <img class="object-cover w-full h-screen md:hidden" src="img/fons-form.jpg" alt="Background Image">
+                <img class="object-cover w-full h-screen" src="img/fons-form.jpg" alt="Background Image">
                 <div
                     class="overlay-login absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-8">
                     <h1 class="text-6xl font-bold text-black mb-4">Test</h1>
