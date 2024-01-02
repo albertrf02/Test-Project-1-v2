@@ -51,9 +51,9 @@ class Users
 
     public function getCardsByUser($token)
     {
-        $query = 'SELECT Resguards.*
-        FROM Resguards
-        JOIN participants ON Resguards.idParticipant = participants.id
+        $query = 'SELECT resguards.*
+        FROM resguards
+        JOIN participants ON resguards.idParticipant = participants.id
         WHERE participants.token = :token;';
         $stm = $this->sql->prepare($query);
         $stm->execute([':token' => $token]);
@@ -63,7 +63,7 @@ class Users
 
     public function uploadCard($id)
     {
-        $query = 'INSERT INTO Resguards (idParticipant, path) VALUES (:id, :path);';
+        $query = 'INSERT INTO resguards (idParticipant, path) VALUES (:id, :path);';
         $stm = $this->sql->prepare($query);
         $stm->execute([':id' => $id, ':path' => $_FILES['card']['name']]);
 
