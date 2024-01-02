@@ -14,7 +14,8 @@
         <form id="loginAJAX" method="post" class="space-y-4">
             <div>
                 <label for="username" class="block text-sm font-medium text-gray-600">Introdueix el teu token</label>
-                <input type="text" name="username" id="username" class="mt-1 p-2 w-full border rounded-md">
+                <input type="text" name="username" id="username" class="mt-1 p-2 w-full border rounded-md"
+                    value="<?= $token ?>">
             </div>
             <div>
                 <input type="submit" value="Login" class="bg-blue-500 text-white p-2 rounded-md cursor-pointer w-full">

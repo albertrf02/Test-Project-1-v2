@@ -2,6 +2,12 @@
 
 namespace App\Controllers;
 
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
+
 class ViewsController
 {
     public function index($request, $response, $container)
@@ -49,19 +55,45 @@ class ViewsController
 
     public function comprovant($request, $response, $container)
     {
-        $idParticipant = ($_SESSION["idParticipant"]);
         $modelUsers = $container->get("users");
+        $modelFormulari = $container->get("formulari");
+
+        $idParticipant = ($_SESSION["idParticipant"]);
         $participant = $modelUsers->getParticipantById($idParticipant);
         $response->set("participant", $participant);
+
+        $qrfilename = $modelFormulari->generateRandomToken() . '.png';
+        $response->set("qrfilename", $qrfilename);
+
+        $result = Builder::create()
+            ->writer(new PngWriter())
+            ->writerOptions([])
+            ->data('http://' . $_SERVER['HTTP_HOST'] . '/login?token=' . $participant['token'])
+            ->encoding(new Encoding('UTF-8'))
+            ->errorCorrectionLevel(ErrorCorrectionLevel::High)
+            ->size(300)
+            ->margin(10)
+            ->roundBlockSizeMode(RoundBlockSizeMode::Margin)
+            ->validateResult(false)
+            ->build();
+
+        $result->saveToFile($_SERVER['DOCUMENT_ROOT'] . '/qr/' . $qrfilename);
+
+
         $response->setTemplate("comprovant.php");
         return $response;
     }
 
     public function login($request, $response, $container)
     {
+        if (isset($_GET['token'])) {
+            $token = $_GET['token'];
+        } else {
+            $token = "";
+        }
+        $response->set("token", $token);
+
         $response->setTemplate("login.php");
-        $user = $request->get("SESSION", "user");
-        $response->set("user", $user);
         return $response;
     }
 

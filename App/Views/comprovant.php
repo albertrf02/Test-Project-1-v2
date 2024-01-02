@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Comprovant</title>
-    <!-- Add the Tailwind CSS CDN link -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
@@ -47,6 +45,9 @@
                 <?= $participant["grup"] ?>
             </p>
 
+            <img src="<?= "/qr/" . $qrfilename; ?>" alt="">
+
+
             <div class="flex mt-6 mb-6">
                 <a href="/"
                     class="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-800 transition mr-6 ml-6">Pàgina
@@ -62,7 +63,7 @@
 
         </div>
     </div>
-
 </body>
+<?php require "scripts.php" ?>
 
 </html>
