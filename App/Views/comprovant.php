@@ -20,31 +20,31 @@
             <h2 class="text-2xl font-bold mb-4">Informació registrada</h2>
             <hr class="mb-4">
             <p class="mb-2"><strong>Codi de registre:</strong>
-                <?= $lastInscription["token"] ?>
+                <?= $participant["token"] ?>
             </p>
             <p class="mb-2"><strong>Nom:</strong>
-                <?= $lastInscription["nom"] ?>
+                <?= $participant["nom"] ?>
             </p>
             <p class="mb-2"><strong>Cognoms:</strong>
-                <?= $lastInscription["cognoms"] ?>
+                <?= $participant["cognoms"] ?>
             </p>
             <p class="mb-2"><strong>Data de neixement:</strong>
-                <?= $lastInscription["dataNaixement"] ?>
+                <?= $participant["dataNaixement"] ?>
             </p>
             <p class="mb-2"><strong>Carrer:</strong>
-                <?= $lastInscription["carrer"] ?>
+                <?= $participant["carrer"] ?>
             </p>
             <p class="mb-2"><strong>Numero:</strong>
-                <?= $lastInscription["numero"] ?>
+                <?= $participant["numero"] ?>
             </p>
             <p class="mb-2"><strong>Ciutat:</strong>
-                <?= $lastInscription["ciutat"] ?>
+                <?= $participant["ciutat"] ?>
             </p>
             <p class="mb-2"><strong>Codi postal:</strong>
-                <?= $lastInscription["cp"] ?>
+                <?= $participant["cp"] ?>
             </p>
             <p class="mb-2"><strong>Grup:</strong>
-                <?= $lastInscription["grup"] ?>
+                <?= $participant["grup"] ?>
             </p>
 
             <div class="flex mt-6 mb-6">

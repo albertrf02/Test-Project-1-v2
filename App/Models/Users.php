@@ -34,15 +34,6 @@ class Users
         $this->options = $options;
     }
 
-    public function getLastInscription()
-    {
-        $sql = "SELECT * FROM participants ORDER BY Id DESC LIMIT 1";
-        $stmt = $this->sql->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetch(\PDO::FETCH_ASSOC);
-        return $result;
-    }
-
     public function getUser($token)
     {
         $query = 'select * from participants where token=:token;';
@@ -60,9 +51,9 @@ class Users
 
     public function getCardsByUser($token)
     {
-        $query = 'SELECT Resguard.*
-        FROM Resguard
-        JOIN participants ON Resguard.idParticipants = participants.id
+        $query = 'SELECT Resguards.*
+        FROM Resguards
+        JOIN participants ON Resguards.idParticipant = participants.id
         WHERE participants.token = :token;';
         $stm = $this->sql->prepare($query);
         $stm->execute([':token' => $token]);
@@ -72,11 +63,26 @@ class Users
 
     public function uploadCard($id)
     {
-        $query = 'INSERT INTO Resguard (idParticipants, path) VALUES (:id, :path);';
+        $query = 'INSERT INTO Resguards (idParticipant, path) VALUES (:id, :path);';
         $stm = $this->sql->prepare($query);
         $stm->execute([':id' => $id, ':path' => $_FILES['card']['name']]);
 
         return $stm->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getParticipantById($id)
+    {
+        $query = 'select * from participants where id=:id;';
+        $stm = $this->sql->prepare($query);
+        $stm->execute([':id' => $id]);
+
+        if ($stm->errorCode() !== '00000') {
+            $err = $stm->errorInfo();
+            $code = $stm->errorCode();
+            die("Error.   {$err[0]} - {$err[1]}\n{$err[2]} $query");
+        }
+
+        return $stm->fetch(\PDO::FETCH_ASSOC);
     }
 
 }

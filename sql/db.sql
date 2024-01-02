@@ -16,9 +16,9 @@ CREATE TABLE participants (
     grup VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE Resguard (
+CREATE TABLE Resguards (
     id INT AUTO_INCREMENT PRIMARY KEY,
     path VARCHAR(255),
-    idParticipants INT,
-    FOREIGN KEY (idParticipants) REFERENCES participants(id)
+    idParticipant INT,
+    FOREIGN KEY (idParticipant) REFERENCES participants(id)
 );

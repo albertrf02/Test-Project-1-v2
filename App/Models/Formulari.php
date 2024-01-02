@@ -84,13 +84,14 @@ class Formulari
                 $stmt->bindParam(':grup', $grup);
 
                 if ($stmt->execute()) {
-                    $resguardsql = "INSERT INTO resguard (path, idParticipants) VALUES (:path, :idParticipants)";
+                    $idParticipant = $this->sql->lastInsertId();
+                    $resguardsql = "INSERT INTO resguards (path, idParticipant) VALUES (:path, :idParticipant)";
                     $resguardStmt = $this->sql->prepare($resguardsql);
                     $resguardStmt->bindParam(':path', $_FILES['resguard']['name']);
-                    $resguardStmt->bindParam(':idParticipants', $this->sql->lastInsertId());
+                    $resguardStmt->bindParam(':idParticipant', $idParticipant);
 
                     if ($resguardStmt->execute()) {
-                        return true;
+                        return $idParticipant;
                     } else {
                         echo "No s'ha pogut pujar el resguard";
                     }

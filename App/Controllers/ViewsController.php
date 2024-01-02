@@ -35,7 +35,8 @@ class ViewsController
 
             if (!$exisitingUser) {
                 $response->set("error", "");
-                $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
+                $idParticipant = $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
+                $response->setSession("idParticipant", $idParticipant);
                 $response->redirect("Location: /comprovant");
             } else {
                 $response->set("error", "Ja has participat una vegada, inicia sessió per tornar a participar.");
@@ -48,9 +49,10 @@ class ViewsController
 
     public function comprovant($request, $response, $container)
     {
+        $idParticipant = ($_SESSION["idParticipant"]);
         $modelUsers = $container->get("users");
-        $lastInscription = $modelUsers->getLastInscription();
-        $response->set("lastInscription", $lastInscription);
+        $participant = $modelUsers->getParticipantById($idParticipant);
+        $response->set("participant", $participant);
         $response->setTemplate("comprovant.php");
         return $response;
     }
