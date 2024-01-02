@@ -66,7 +66,7 @@ class Formulari
     {
 
         if (isset($_FILES['resguard']) && $_FILES['resguard']['error'] === 0) {
-            $resguardPath = 'resguard/' . $_FILES['resguard']['name'];
+            $resguardPath = 'resguard/' . $this->generateRandomToken() . $_FILES['resguard']['name'];
 
             if (move_uploaded_file($_FILES['resguard']['tmp_name'], $resguardPath)) {
                 $sql = "INSERT INTO participants (nom, cognoms, token, dataNaixement, carrer, numero, ciutat, cp, grup)
