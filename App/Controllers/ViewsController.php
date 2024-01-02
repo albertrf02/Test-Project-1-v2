@@ -65,13 +65,16 @@ class ViewsController
         $qrfilename = $modelFormulari->generateRandomToken() . '.png';
         $response->set("qrfilename", $qrfilename);
 
+        $urltoken = 'http://' . $_SERVER['HTTP_HOST'] . '/login?token=' . $participant['token'];
+        $response->set("urltoken", $urltoken);
+
         $result = Builder::create()
             ->writer(new PngWriter())
             ->writerOptions([])
-            ->data('http://' . $_SERVER['HTTP_HOST'] . '/login?token=' . $participant['token'])
+            ->data($urltoken)
             ->encoding(new Encoding('UTF-8'))
             ->errorCorrectionLevel(ErrorCorrectionLevel::High)
-            ->size(300)
+            ->size(150)
             ->margin(10)
             ->roundBlockSizeMode(RoundBlockSizeMode::Margin)
             ->validateResult(false)

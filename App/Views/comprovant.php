@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
     <title>Comprovant</title>
 </head>
 
@@ -18,7 +19,9 @@
             <h2 class="text-2xl font-bold mb-4">Informació registrada</h2>
             <hr class="mb-4">
             <p class="mb-2"><strong>Codi de registre:</strong>
-                <?= $participant["token"] ?>
+                <a href="<?= $urltoken ?>">
+                    <?= $participant["token"] ?>
+                </a>
             </p>
             <p class="mb-2"><strong>Nom:</strong>
                 <?= $participant["nom"] ?>
@@ -45,7 +48,7 @@
                 <?= $participant["grup"] ?>
             </p>
 
-            <img src="<?= "/qr/" . $qrfilename; ?>" alt="">
+            <img src="<?= "/qr/" . $qrfilename; ?>" alt="" class="ml-20">
 
 
             <div class="flex mt-6 mb-6">
