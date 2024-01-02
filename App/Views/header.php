@@ -3,7 +3,8 @@
         <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <a href="/" class="flex items-center">
                 <img src="/img/logo.jpg" class="mr-3 h-6 sm:h-9" alt="Logo" />
-                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Test</span>
+                <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Concurs
+                    Nadalenc</span>
             </a>
             <div class="flex items-center lg:order-2">
                 <?php if (isset($_SESSION['user'])): ?>

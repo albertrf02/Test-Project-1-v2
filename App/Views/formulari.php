@@ -145,7 +145,7 @@
                 <img class="object-cover w-full h-screen" src="img/fons-form.jpg" alt="Background Image">
                 <div
                     class="overlay-login absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-8">
-                    <h1 class="text-6xl font-bold text-black mb-4">Test</h1>
+                    <h1 class="text-6xl font-bold text-black mb-4">Concurs Nadalenc</h1>
                     <p class="text-sm text-white-700 mb-10">Si ja has participat, inicia sessió per veure les
                         participacions botó
                     </p>
