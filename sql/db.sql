@@ -1,7 +1,7 @@
-DROP DATABASE IF EXISTS testProject1;
-CREATE DATABASE testProject1;
+DROP DATABASE IF EXISTS testproject1;
+CREATE DATABASE testproject1;
 
-use testProject1;
+use testproject1;
 
 CREATE TABLE participants (
     id INT AUTO_INCREMENT PRIMARY KEY,
