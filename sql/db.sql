@@ -16,7 +16,7 @@ CREATE TABLE participants (
     grup VARCHAR(50) NOT NULL
 );
 
-CREATE TABLE Resguards (
+CREATE TABLE resguards (
     id INT AUTO_INCREMENT PRIMARY KEY,
     path VARCHAR(255),
     idParticipant INT,
