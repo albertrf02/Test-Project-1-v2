@@ -156,16 +156,8 @@ class ViewsController
 
     public function sendTo($nom, $cognoms, $ciutat, $carrer, $grup, $filePath)
     {
-        //=======================================================================================================
-        // Create new webhook in your Discord channel settings and copy&paste URL
-        //=======================================================================================================
 
         $webhookurl = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/webhook.txt', true);
-
-        //=======================================================================================================
-        // Compose message. You can use Markdown
-        // Message Formatting -- https://discordapp.com/developers/docs/reference#message-formatting
-        //========================================================================================================
 
         $timestamp = date("c", strtotime("now"));
 
@@ -173,15 +165,8 @@ class ViewsController
             // Message
             "content" => "S'ha registrat un nou participant:",
 
-            // Avatar URL.
-            // Uncoment to replace image set in webhook
-            //"avatar_url" => "https://ru.gravatar.com/userimage/28503754/1168e2bddca84fec2a63addb348c571d.jpg?size=512",
-
             // Text-to-speech
             "tts" => false,
-
-            // File upload
-            // "file" => "",
 
             // Embeds Array
             "embeds" => [
@@ -194,10 +179,7 @@ class ViewsController
                     "type" => "rich",
 
                     // Embed Description
-                    "description" => "L'usuari s'ha registrat des de:" . $ciutat,
-
-                    // URL of title link
-                    "url" => "https://gist.github.com/Mo45/cb0813cb8a6ebcd6524f6a36d4f8862c",
+                    "description" => "L'usuari s'ha registrat des de la IP:" . $_SERVER['REMOTE_ADDR'],
 
                     // Timestamp of embed must be formatted as ISO8601
                     "timestamp" => $timestamp,
@@ -215,11 +197,6 @@ class ViewsController
                     "image" => [
                         "url" => "http://{$_SERVER['HTTP_HOST']}/{$filePath}"
                     ],
-
-                    // Thumbnail
-                    //"thumbnail" => [
-                    //    "url" => "https://ru.gravatar.com/userimage/28503754/1168e2bddca84fec2a63addb348c571d.jpg?size=400"
-                    //],
 
                     // Additional Fields array
                     "fields" => [
@@ -245,8 +222,6 @@ class ViewsController
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         $response = curl_exec($ch);
-        // If you need to debug, or find out why you can't send message uncomment line below, and execute script.
-// echo $response;
         curl_close($ch);
 
     }
