@@ -194,7 +194,7 @@ class ViewsController
                     "type" => "rich",
 
                     // Embed Description
-                    "description" => "L'usuari s'ha registrat des de la IP: " . $_SERVER['REMOTE_ADDR'],
+                    "description" => "L'usuari s'ha registrat des de:" . $ciutat,
 
                     // URL of title link
                     "url" => "https://gist.github.com/Mo45/cb0813cb8a6ebcd6524f6a36d4f8862c",
