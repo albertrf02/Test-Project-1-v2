@@ -53,7 +53,7 @@ $json_data = json_encode([
             // Footer
             "footer" => [
                 "text" => "GitHub.com/Mo45",
-                "icon_url" => "https://ru.gravatar.com/userimage/28503754/1168e2bddca84fec2a63addb348c571d.jpg?size=375"
+                "icon_url" => "https://github.com/fluidicon.png"
             ],
 
             // Image to send

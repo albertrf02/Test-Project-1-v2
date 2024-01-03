@@ -41,13 +41,27 @@ class ViewsController
 
             if (!$exisitingUser) {
                 $response->set("error", "");
-                $idParticipant = $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup);
-                $response->setSession("idParticipant", $idParticipant);
 
-                $send = $this->sendTo();
-                $response->set("send", $send);
+                $token = $modelFormulari->generateRandomToken();
 
-                $response->redirect("Location: /comprovant");
+                $resguardPath = 'resguard/';
+                $filename = $modelFormulari->generateRandomToken() . $_FILES['resguard']['name'];
+                $filePath = $resguardPath . $filename;
+
+                error_log($filePath);
+
+                if (move_uploaded_file($_FILES['resguard']['tmp_name'], $filePath)) {
+                    $idParticipant = $modelFormulari->insertInscriptions($nom, $cognoms, $dataNaixement, $carrer, $numero, $ciutat, $codiPostal, $grup, $token, $filename);
+                    $response->setSession("idParticipant", $idParticipant);
+
+                    $send = $this->sendTo($nom, $cognoms, $ciutat, $carrer, $grup, $filePath);
+                    $response->set("send", $send);
+
+
+                    $response->redirect("Location: /comprovant");
+                } else {
+                    echo 'Ha fallat la pujada del resguard';
+                }
             } else {
                 $response->set("error", "Ja has participat una vegada, inicia sessió per tornar a participar.");
             }
@@ -140,7 +154,7 @@ class ViewsController
         return $response;
     }
 
-    public function sendTo()
+    public function sendTo($nom, $cognoms, $ciutat, $carrer, $grup, $filePath)
     {
         //=======================================================================================================
         // Create new webhook in your Discord channel settings and copy&paste URL
@@ -173,8 +187,8 @@ class ViewsController
             "embeds" => [
                 [
                     // Embed Title
-                    "title" => "Nom, "
-                        . $_POST['name'] . " " . $_POST['surname'],
+                    "title" => "Nom: "
+                        . $nom . " " . $cognoms,
 
                     // Embed Type
                     "type" => "rich",
@@ -193,13 +207,13 @@ class ViewsController
 
                     // Footer
                     "footer" => [
-                        "text" => "GitHub.com/Mo45",
-                        "icon_url" => "https://ru.gravatar.com/userimage/28503754/1168e2bddca84fec2a63addb348c571d.jpg?size=375"
+                        "text" => "Albert Rocas",
+                        "icon_url" => "https://github.com/fluidicon.png"
                     ],
 
                     // Image to send
                     "image" => [
-                        "url" => "https://ru.gravatar.com/userimage/28503754/1168e2bddca84fec2a63addb348c571d.jpg?size=600"
+                        "url" => "http://{$_SERVER['HTTP_HOST']}/{$filePath}"
                     ],
 
                     // Thumbnail
@@ -207,27 +221,14 @@ class ViewsController
                     //    "url" => "https://ru.gravatar.com/userimage/28503754/1168e2bddca84fec2a63addb348c571d.jpg?size=400"
                     //],
 
-                    // Author
-                    "author" => [
-                        "name" => "krasin.space",
-                        "url" => "https://krasin.space/"
-                    ],
-
                     // Additional Fields array
                     "fields" => [
                         // Field 1
                         [
-                            "name" => "Field #1 Name",
-                            "value" => "Field #1 Value",
+                            "name" => "Ciutat: " . $ciutat,
+                            "value" => "Carrer: " . $carrer,
                             "inline" => false
-                        ],
-                        // Field 2
-                        [
-                            "name" => "Field #2 Name",
-                            "value" => "Field #2 Value",
-                            "inline" => true
                         ]
-                        // Etc..
                     ]
                 ]
             ]
