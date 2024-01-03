@@ -29,7 +29,7 @@ $app->get("/taules", [ViewsController::class, "taules"], [[\App\Middleware\Auth:
 $app->post("/uploadCard", [ViewsController::class, "uploadCard"], [[\App\Middleware\Auth::class, "auth"]]);
 
 
-
-$app->route(Router::DEFAULT_ROUTE, "\App\Controllers\ErrorController:error404");
+//url no trobada mostra l'index
+$app->route(Router::DEFAULT_ROUTE, [ViewsController::class, "index"]);
 
 $app->execute();
