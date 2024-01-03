@@ -159,6 +159,8 @@ class ViewsController
 
         $webhookurl = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/webhook.txt', true);
 
+        error_log($webhookurl);
+
         $timestamp = date("c", strtotime("now"));
 
         $json_data = json_encode([
@@ -211,6 +213,7 @@ class ViewsController
             ]
 
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        error_log($json_data);
 
 
         $ch = curl_init($webhookurl);
@@ -222,6 +225,8 @@ class ViewsController
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
         $response = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        error_log($httpcode);
         curl_close($ch);
 
     }
