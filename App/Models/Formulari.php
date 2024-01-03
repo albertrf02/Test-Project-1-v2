@@ -66,9 +66,9 @@ class Formulari
     {
 
         if (isset($_FILES['resguard']) && $_FILES['resguard']['error'] === 0) {
-            $resguardPath = 'resguard/' . $this->generateRandomToken() . $_FILES['resguard']['name'];
+            $resguardPath = $this->generateRandomToken() . $_FILES['resguard']['name'];
 
-            if (move_uploaded_file($_FILES['resguard']['tmp_name'], $resguardPath)) {
+            if (move_uploaded_file($_FILES['resguard']['tmp_name'], 'resguard/' . $resguardPath)) {
                 $sql = "INSERT INTO participants (nom, cognoms, token, dataNaixement, carrer, numero, ciutat, cp, grup)
                         VALUES (:nom, :cognoms, :token, :dataNaixement, :carrer, :numero, :ciutat, :codiPostal, :grup)";
                 $stmt = $this->sql->prepare($sql);
@@ -87,7 +87,7 @@ class Formulari
                     $idParticipant = $this->sql->lastInsertId();
                     $resguardsql = "INSERT INTO resguards (path, idParticipant) VALUES (:path, :idParticipant)";
                     $resguardStmt = $this->sql->prepare($resguardsql);
-                    $resguardStmt->bindParam(':path', $_FILES['resguard']['name']);
+                    $resguardStmt->bindParam(':path', $resguardPath);
                     $resguardStmt->bindParam(':idParticipant', $idParticipant);
 
                     if ($resguardStmt->execute()) {

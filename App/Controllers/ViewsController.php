@@ -119,11 +119,22 @@ class ViewsController
     public function uploadCard($request, $response, $container)
     {
         $modelUsers = $container->get("users");
+        $modelFormulari = $container->get("formulari");
         $user = $request->get("SESSION", "user");
 
         if (isset($_FILES['card']) && $_FILES['card']['error'] === 0) {
-            $modelUsers->uploadCard($user["id"]);
-            $response->redirect("Location: /taules");
+            $resguardPath = 'resguard/';
+
+            $filename = $modelFormulari->generateRandomToken() . $_FILES['card']['name'];
+
+            $filePath = $resguardPath . $filename;
+
+            if (move_uploaded_file($_FILES['card']['tmp_name'], $filePath)) {
+                $modelUsers->uploadCard($user["id"], $filename);
+                $response->redirect("Location: /taules");
+            } else {
+                echo 'Failed to move the uploaded file.';
+            }
         }
 
         return $response;

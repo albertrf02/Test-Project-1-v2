@@ -28,7 +28,7 @@
                     <td>
                         <span class="text-blue-500 cursor-pointer hover:underline image-link"
                             data-path="<?= "/resguard/" . $card['path']; ?>">
-                            <?= $card['path']; ?>
+                            <?= substr($filename = pathinfo($card['path'], PATHINFO_FILENAME), 10); ?>
                         </span>
                     </td>
                 </tr>
