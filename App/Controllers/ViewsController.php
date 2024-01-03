@@ -157,7 +157,7 @@ class ViewsController
     public function sendTo($nom, $cognoms, $ciutat, $carrer, $grup, $filePath)
     {
 
-        $webhookurl = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/webhook.txt', true);
+        $webhookurl = trim(file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/webhook.txt', true));
 
         $timestamp = date("c", strtotime("now"));
 
